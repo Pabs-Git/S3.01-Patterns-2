@@ -4,24 +4,29 @@ import org.example.classes.HawaiianPizzaBuilder;
 import org.example.classes.Pizza;
 import org.example.classes.PizzaMaster;
 import org.example.classes.VegetarianPizzaBuilder;
+import org.example.interfaces.PizzaBuilder;
 
 import java.util.Arrays;
 
 public class Main {
-
     public static void main(String[] args) {
-        PizzaMaster pizzaMaster = new PizzaMaster(new HawaiianPizzaBuilder());
-        Pizza hawaiianPizza = pizzaMaster.createPizza("small", "thin", Arrays.asList("ham", "pineapple"));
-        System.out.println(hawaiianPizza);
 
-        Pizza hawaiianPizza2 = pizzaMaster.createPizza("large", "thick", Arrays.asList("pineapple"));
-        System.out.println(hawaiianPizza2);
+        // Vegetarian Pizza
+        PizzaBuilder vegetarianBuilder = new VegetarianPizzaBuilder();
+        PizzaMaster pizzaMaster = new PizzaMaster();
+        pizzaMaster.buildVegetarianPizza(vegetarianBuilder);
+        Pizza vegetarianPizza = pizzaMaster.getPizza(vegetarianBuilder);
 
-        pizzaMaster = new PizzaMaster(new VegetarianPizzaBuilder());
-        Pizza vegetarianPizza = pizzaMaster.createPizza("large", "thick", Arrays.asList("tomato", "pepper"));
+        System.out.println("Vegetarian pizza created:");
         System.out.println(vegetarianPizza);
 
-        Pizza vegetarianPizza2 = pizzaMaster.createPizza("medium", "thick", Arrays.asList("tomato", "onion", "pepper"));
-        System.out.println(vegetarianPizza2);
-        }
+        // Hawaiian Pizza
+        PizzaBuilder hawaiianBuilder = new HawaiianPizzaBuilder();
+        pizzaMaster.buildHawaiianPizza(hawaiianBuilder);
+        Pizza hawaiianPizza = pizzaMaster.getPizza(hawaiianBuilder);
+
+        System.out.println("\nHawaiian pizza created:");
+        System.out.println(hawaiianPizza);
     }
+}
+
